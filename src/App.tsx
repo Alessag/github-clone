@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  Route,
-  BrowserRouter,
-  Routes,
-  // Navigate,
-} from "react-router-dom";
-import { Profile } from "./components/views";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 
 import "./App.css";
+import Profile from "./components/pages/Profile";
 
 const App: React.FC = () => {
   return (
