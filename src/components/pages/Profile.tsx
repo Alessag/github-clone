@@ -1,41 +1,31 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { API_HOST } from "../../globals/constants";
 import { Header } from "../commons/Header";
 import { Footer } from "../commons/Footer";
 import ProfileContainer from "./ProfileContainer";
+import { GithubService } from "../../services/GithubService";
+import { User } from "../../types/User";
+import { Repository } from "../../types/Repository";
 
 const Profile = () => {
+  const githubService = new GithubService();
   let { username = "alessag" } = useParams<{ username: string }>();
-  const [user, setUser] = React.useState<any>();
-  const [repositories, setRepositories] = React.useState<any>();
+  const [user, setUser] = React.useState<User>();
+  const [repositories, setRepositories] = React.useState<Array<Repository>>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const fetchApi: any = async (path: string) => {
-    try {
-      const response = await fetch(`${API_HOST}/${path}`);
-      const data = await response.json();
-      return {
-        data,
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   React.useEffect(() => {
-    Promise.all([
-      fetchApi(`users/${username}`),
-      fetchApi(`users/${username}/repos`),
-    ])
-      .then(([user, repos]) => {
-        setUser(user?.data);
-        setRepositories(repos?.data);
+    const fetchData = async () => {
+      const githubUser = await githubService.getUserByUsername(username);
+      const githubRepos = await githubService.getReposByUsername(username);
+      if (githubUser && githubRepos) {
+        setUser(githubUser);
+        setRepositories(githubRepos);
         setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    };
+
+    fetchData();
   }, [username]);
 
   if (isLoading) {
@@ -45,7 +35,7 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <ProfileContainer user={user} repositories={repositories} />
+      <ProfileContainer user={user as User} repositories={repositories} />
       <Footer />
     </>
   );

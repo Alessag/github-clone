@@ -1,20 +1,19 @@
-export type User = {
-  avatarUrl: string;
+export type GithubUser = {
+  avatar_url: string;
   bio: string;
   blog: string;
   company: string;
   email: string;
   followers: number;
   following: number;
-  htmUrl: string;
+  html_url: string;
   id: number;
   location: string;
   login: string;
   name: string;
-  organizationsUrl: string;
-  publicRepos: number;
-  reposUrl: string;
-  twitterUsername: string;
+  organizations_url: string;
+  public_repos: number;
+  repos_url: string;
+  twitter_username: string;
   url: string;
-  mutualFollowers: number;
 };

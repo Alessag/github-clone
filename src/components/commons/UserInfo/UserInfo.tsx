@@ -4,7 +4,7 @@ import { BiBuildings } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { GiBreakingChain } from "react-icons/gi";
-import User from "../../../types/User";
+import { User } from "../../../types/User";
 
 import {
   Button,
@@ -22,39 +22,41 @@ interface UserInfoProps {
 const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   return (
     <UserInfoContainer className="UserInfo">
-      <UserPhoto src={user?.avatar_url} alt={user?.name} />
-      <h2 className="name">{user?.name}</h2>
-      <span className="user-name">{user?.login}</span>
+      <UserPhoto src={user.avatarUrl} alt={user.name} />
+      <h2 className="name">{user.name}</h2>
+      <span className="user-name">{user.login}</span>
       <Button href="https://github.com/login" className="btn-edit">
         Edit
       </Button>
-      <p className="biography">{user?.bio}</p>
+      <p className="biography">{user.bio}</p>
       <SectionOne>
         <IconDescription className="followers">
-          <FaUsers /> <span>{user?.followers}</span> followers -
+          <FaUsers /> <span>{user.followers}</span> followers -
         </IconDescription>
         <div>
-          <span>{user?.following}</span> following -
+          <span>{user.following}</span> following -
         </div>
         <IconDescription>
           <AiOutlineStar /> <span>stars</span>
         </IconDescription>
       </SectionOne>
       <SectionTwo>
-        {user?.company !== null && user?.company !== "" && (
+        {user.company !== null && user.company !== "" && (
           <IconDescription className="company">
-            <BiBuildings /> <span>{user?.company}</span>
+            <BiBuildings /> <span>{user.company}</span>
           </IconDescription>
         )}
-        {user?.location !== null && user?.location !== "" && (
+        {user.location !== null && user.location !== "" && (
           <IconDescription>
-            <FiMapPin /> {user?.location}
+            <FiMapPin /> {user.location}
           </IconDescription>
         )}
-        {user?.blog !== null && user?.blog !== "" && (
+        {user.blog !== null && user.blog !== "" && (
           <IconDescription>
             <GiBreakingChain />
-            <a href={user?.blog}>{user?.blog}</a>
+            <a href={user.blog} target="_blank">
+              {user.blog}
+            </a>
           </IconDescription>
         )}
       </SectionTwo>

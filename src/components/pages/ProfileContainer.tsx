@@ -4,10 +4,10 @@ import { ProfileMenu } from "../commons/ProfileMenu";
 import { RepositoryCard } from "../commons/RepositoryCard";
 import { UserInfo } from "../commons/UserInfo";
 import { Wrapper } from "../../styles/shared";
-import Repository from "../../types/Repository";
-import User from "../../types/User";
 
 import { Profile } from "./styles";
+import { User } from "../../types/User";
+import { Repository } from "../../types/Repository";
 interface ProfileContainerProps {
   user: User;
   repositories: Repository[];
